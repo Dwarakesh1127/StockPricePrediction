@@ -35,10 +35,10 @@ def train_lightgbm(df, features, label_col='Target'):
         n_estimators=1000,
         max_depth=12,
         learning_rate=0.01,
-        reg_lambda=0.09,  # L2 regularization
+        reg_lambda=0.1,  # L2 regularization
         scale_pos_weight=scale,
         random_state=42,
-        subsample=0.8
+        subsample=0.8,
     )
     model.fit(X_train, y_train)
 
@@ -66,9 +66,9 @@ def train_lightgbm(df, features, label_col='Target'):
         with open(metrics_path, 'rb') as f:
             best_metrics = pickle.load(f)
     else:
-        best_metrics = {'f1': 0, 'recall': 0}
+        best_metrics = {'f1': 0, 'precision': 0}
 
-    if f1 > best_metrics['f1'] and recall > best_metrics['recall']:
+    if f1 > best_metrics['f1'] and precision > best_metrics['precision']:
         with open(model_path, 'wb') as f:
             pickle.dump(model, f)
         with open(metrics_path, 'wb') as f:
