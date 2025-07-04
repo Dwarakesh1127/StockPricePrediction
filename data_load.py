@@ -36,7 +36,6 @@ def add_technical_indicators(df):
     df['STD20'] = df['Close'].rolling(window=20).std()
     df['sales'] = df['Volume_Change'] * df['Open_Close_Diff']  # Assuming 'Volume' is a column in df
     
- 
         # ATR Calculation
     df['High-Low'] = df['High'] - df['Low']
     df['High-PrevClose'] = np.abs(df['High'] - df['Close'].shift(1))
@@ -67,4 +66,4 @@ def add_technical_indicators(df):
     df.dropna(inplace=True)
     return df
 
-#all momentums, all stds, all rolling means,   
+#all momentums, all stds, all rolling means
